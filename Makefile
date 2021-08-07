@@ -1,5 +1,5 @@
 APP?=echo
-REPO?=localhost
+REPO?=
 RELEASE?=0.1
 VERSION?=0.1.1
 USER?=$(shell id -u -n)
