@@ -32,7 +32,7 @@ spec:
         app: echosvc
     spec:
       containers:
-      - image: docker.io/library/echo:0.1
+      - image: localhost/echo:0.1.1
         name: echosvc
         ports:
         - containerPort: 8080

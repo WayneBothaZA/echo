@@ -1,5 +1,5 @@
 APP?=echo
-REPO?=docker.pkg.github.com/waynebothaza/echo/
+REPO?=localhost
 RELEASE?=0.1
 VERSION?=0.1.1
 USER?=$(shell id -u -n)
@@ -30,9 +30,9 @@ docker:
 	@docker tag ${REPO}${APP}:${VERSION} ${REPO}${APP}:${RELEASE}
 
 microk8s: docker
-	@docker save ${APP}:${RELEASE} > ${APP}-${RELEASE}.tar
-	@microk8s ctr image import ${APP}-${RELEASE}.tar
-	@rm ${APP}-${RELEASE}.tar
+	@docker save ${APP}:${VERSION} > ${APP}-${VERSION}.tar
+	@microk8s ctr image import ${APP}-${VERSION}.tar
+	@rm ${APP}-${VERSION}.tar
 
 test:
 	@go test -v ./...
