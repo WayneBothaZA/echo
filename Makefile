@@ -1,7 +1,7 @@
 APP?=echo
 REPO?=docker.pkg.github.com/waynebothaza/echo/
 RELEASE?=0.1
-VERSION?=0.1.0
+VERSION?=0.1.1
 USER?=$(shell id -u -n)
 COMMIT?=$(shell git rev-parse --short HEAD)
 BUILD_DATE?=$(shell date -u '+%Y-%m-%d')
