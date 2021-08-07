@@ -36,11 +36,6 @@ spec:
         name: echosvc
         ports:
         - containerPort: 8080
-        env:
-          - name: POD_NAME
-            valueFrom:
-              fieldRef:
-                fieldPath: metadata.name
         resources: {}
 ---
 apiVersion: networking.k8s.io/v1
