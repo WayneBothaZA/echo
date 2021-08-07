@@ -2,6 +2,8 @@ apiVersion: v1
 kind: Service
 metadata:
   name: echosvc
+  labels:
+    app: echosvc
 spec:
   selector:
     app: echosvc
@@ -15,8 +17,10 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: echosvc
+  labels:
+    app: echosvc
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: echosvc
@@ -32,6 +36,11 @@ spec:
         name: echosvc
         ports:
         - containerPort: 8080
+        env:
+          - name: POD_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.name
         resources: {}
 ---
 apiVersion: networking.k8s.io/v1
