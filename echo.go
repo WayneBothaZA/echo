@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"errors"
 	"flag"
 	"fmt"
 	"log"
@@ -14,12 +15,30 @@ var versionFlag *bool = flag.Bool("v", false, "print the version number.")
 var hostName = ""
 var portNumber = "8080"
 
+type EchoRequest struct {
+	Messge string `json:"message"`
+}
+
 type EchoResponse struct {
 	Message  string `json:"message"`
 	Hostname string `json:"hostname"`
 }
 
 func echo(w http.ResponseWriter, r *http.Request) {
+	var req EchoRequest
+	err := decodeJSONBody(w, r, &req)
+	if err != nil {
+		var mr *malformedRequest
+		if errors.As(err, &mr) {
+			log.Printf("%s: /echo %d - %s", hostName, mr.status, mr.msg)
+			http.Error(w, mr.msg, mr.status)
+		} else {
+			log.Printf("%s: /echo - %s (%s)", hostName, http.StatusInternalServerError, http.StatusText(http.StatusInternalServerError), err.Error())
+			http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
+		}
+		return
+	}
+
 	response := EchoResponse{
 		Message:  "echo",
 		Hostname: hostName}
