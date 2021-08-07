@@ -11,8 +11,8 @@ import (
 
 // The flag package provides a default help printer via -h switch
 var versionFlag *bool = flag.Bool("v", false, "print the version number.")
-
 var hostName = ""
+var portNumber = "8080"
 
 type EchoResponse struct {
 	Message  string `json:"message"`
@@ -40,9 +40,14 @@ func main() {
 	}
 
 	hostName, _ = os.LookupEnv("HOSTNAME")
+	if envPort, found := os.LookupEnv("PORT"); found {
+		portNumber = envPort
+	}
 
 	mux := http.NewServeMux()
 	mux.HandleFunc("/echo", echo)
-	log.Printf("starting echo service on %s:%d", hostName, 8080)
-	log.Fatal(http.ListenAndServe(":8080", mux))
+
+	url := ":" + portNumber
+	log.Printf("starting echo service on %s%s", hostName, url)
+	log.Fatal(http.ListenAndServe(url, mux))
 }
