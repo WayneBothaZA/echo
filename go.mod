@@ -1,3 +1,3 @@
-module echo
+module WayneBothaZA/echo
 
-go 1.15
+go 1.17

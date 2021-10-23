@@ -33,7 +33,7 @@ func echo(w http.ResponseWriter, r *http.Request) {
 			log.Printf("%s: /echo %d - %s", hostName, mr.status, mr.msg)
 			http.Error(w, mr.msg, mr.status)
 		} else {
-			log.Printf("%s: /echo - %s (%s)", hostName, http.StatusInternalServerError, http.StatusText(http.StatusInternalServerError), err.Error())
+			log.Printf("%s: /echo - %v %s (%s)", hostName, http.StatusInternalServerError, http.StatusText(http.StatusInternalServerError), err.Error())
 			http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
 		}
 		return
