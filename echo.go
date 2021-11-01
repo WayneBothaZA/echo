@@ -17,7 +17,7 @@ var portNumber = "8080"
 
 // EchoRequest defines the JSON structure of the request message
 type EchoRequest struct {
-	Messge string `json:"message"`
+	Message string `json:"message"`
 }
 
 // EchoResponse defines the JSON structure of the response message

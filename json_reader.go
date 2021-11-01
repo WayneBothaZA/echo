@@ -19,13 +19,20 @@ func (mr *malformedRequest) Error() string {
 }
 
 func decodeJSONBody(w http.ResponseWriter, r *http.Request, dst interface{}) error {
+	/*
+		requestDump, e := httputil.DumpRequest(r, true)
+		if e != nil {
+			fmt.Println(e)
+		}
+		fmt.Println(string(requestDump))
+	*/
+
 	contentType := r.Header.Get("Content-Type")
 	if contentType != "" && contentType != "application/json" {
 		msg := "only Content-Type: application/json is accepted"
 		return &malformedRequest{status: http.StatusUnsupportedMediaType, msg: msg}
 	}
 	r.Body = http.MaxBytesReader(w, r.Body, 1048576)
-
 	dec := json.NewDecoder(r.Body)
 	//dec.DisallowUnknownFields()
 
