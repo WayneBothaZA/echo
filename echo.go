@@ -42,7 +42,7 @@ func echo(w http.ResponseWriter, r *http.Request) {
 	}
 
 	response := EchoResponse{
-		Message:  "echo",
+		Message:  req.Message,
 		Hostname: hostName}
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
