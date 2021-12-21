@@ -22,8 +22,13 @@ type EchoRequest struct {
 
 // EchoResponse defines the JSON structure of the response message
 type EchoResponse struct {
-	Message  string `json:"message"`
-	Hostname string `json:"hostname"`
+	Message   string `json:"message"`
+	Hostname  string `json:"hostname"`
+	UserAgent string `json:"useragent"`
+}
+
+func health(w http.ResponseWriter, r *http.Request) {
+	w.WriteHeader(http.StatusOK)
 }
 
 func echo(w http.ResponseWriter, r *http.Request) {
@@ -42,8 +47,9 @@ func echo(w http.ResponseWriter, r *http.Request) {
 	}
 
 	response := EchoResponse{
-		Message:  req.Message,
-		Hostname: hostName}
+		Message:   req.Message,
+		Hostname:  hostName,
+		UserAgent: r.Header.Get("User-Agent")}
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(response)
@@ -67,6 +73,7 @@ func main() {
 
 	mux := http.NewServeMux()
 	mux.HandleFunc("/echo", echo)
+	mux.HandleFunc("/health", health)
 
 	url := ":" + portNumber
 	log.Printf("starting echo service on %s%s", hostName, url)
