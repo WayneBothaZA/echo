@@ -1,7 +1,7 @@
 APP?=echo
-REPO?=
-RELEASE?=0.1
-VERSION?=0.1.1
+REPO?=witklippies.azurecr.io
+RELEASE?=1.1
+VERSION?=1.1.0
 USER?=$(shell id -u -n)
 COMMIT?=$(shell git rev-parse --short HEAD)
 BUILD_DATE?=$(shell date -u '+%Y-%m-%d')
@@ -26,8 +26,8 @@ ${APP}: *.go
 		-o ${APP}
 
 docker:
-	@docker build -t ${REPO}${APP}:${VERSION}  .
-	@docker tag ${REPO}${APP}:${VERSION} ${REPO}${APP}:${RELEASE}
+	@docker build -t ${REPO}/${APP}:${VERSION}  .
+	@docker tag ${REPO}/${APP}:${VERSION} ${REPO}/${APP}:${RELEASE}
 
 microk8s: docker
 	@docker save ${APP}:${VERSION} > ${APP}-${VERSION}.tar
