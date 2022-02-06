@@ -12,6 +12,8 @@ default: ${APP}
 clean:
 	@rm -f ${APP}
 
+all: default
+
 distclean: clean
 	@docker image rm ${APP}:${RELEASE} 
 	@docker image rm ${APP}:${VERSION} 
