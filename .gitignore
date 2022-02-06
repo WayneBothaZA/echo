@@ -1,1 +1,3 @@
 echo
+.dccache
+.vscode/configurationCache.log
