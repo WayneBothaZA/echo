@@ -32,7 +32,7 @@ docker:
 	@docker tag ${REPO}/${APP}:${VERSION} ${REPO}/${APP}:${RELEASE}
 
 microk8s: docker
-	@docker save ${APP}:${VERSION} > ${APP}-${VERSION}.tar
+	@docker save ${REPO}/${APP}:${VERSION} > ${APP}-${VERSION}.tar
 	@microk8s ctr image import ${APP}-${VERSION}.tar
 	@rm ${APP}-${VERSION}.tar
 
