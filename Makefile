@@ -1,7 +1,7 @@
 APP?=echo
-REPO?=witklippies.azurecr.io
-RELEASE?=1.1
-VERSION?=1.1.1
+REPO?=localhost:32000
+RELEASE?=1.2
+VERSION?=1.2.0
 USER?=$(shell id -u -n)
 COMMIT?=$(shell git rev-parse --short HEAD)
 BUILD_DATE?=$(shell date -u '+%Y-%m-%d')
