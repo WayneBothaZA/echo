@@ -2,10 +2,20 @@
 
 Simple echo REST service in golang
 
-## Running
+## usage
 
-The call the service directly use just replace the IP and port with that of your service
+To call the service, POST this JSON message to the /echo endpoint
 
-```code 
-curl -X "POST" -H "Content-Type: application/json" -d '{"message":"hello"}' 10.152.183.36:8080/echo
+```code
+{
+    "message": "hello world"
+}
+```
+
+## curl commandline
+
+To call the service directly, just replace the IP and port with that of your service
+
+```code
+curl -X "POST" -H "Content-Type: application/json" -d '{"message":"hello world"}' 127.0.0.1:8080/echo
 ```
