@@ -1,5 +1,5 @@
 # specify the base image we need for our go application
-FROM golang:1.17-alpine
+FROM golang:1.18.5-alpine
 
 #RUN apk update && apk upgrade && apk add --no-cache git
 
